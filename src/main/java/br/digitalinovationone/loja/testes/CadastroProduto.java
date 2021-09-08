@@ -1,6 +1,7 @@
 package br.digitalinovationone.loja.testes;
 
 import br.digitalinovationone.loja.dao.ProdutoDAO;
+import br.digitalinovationone.loja.model.Categoria;
 import br.digitalinovationone.loja.model.Produto;
 import br.digitalinovationone.loja.util.JPAUtil;
 
@@ -15,6 +16,7 @@ public class CadastroProduto {
         celular.setNome("Xiami Redmi");
         celular.setDescricao("Muito Legal");
         celular.setPreco(new BigDecimal("800"));
+        celular.setCategoria(Categoria.CELULARES);
 
         //Não da pra instanciar new EntityManagerFactory
         //Para criar um EntityManager precisamos de um EntityManagerFactory uma fábrica de Entitys que cria isto
