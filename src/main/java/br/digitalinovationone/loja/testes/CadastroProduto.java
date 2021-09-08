@@ -1,6 +1,8 @@
 package br.digitalinovationone.loja.testes;
 
+import br.digitalinovationone.loja.dao.ProdutoDAO;
 import br.digitalinovationone.loja.model.Produto;
+import br.digitalinovationone.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,16 +17,16 @@ public class CadastroProduto {
         celular.setPreco(new BigDecimal("800"));
 
         //Não da pra instanciar new EntityManagerFactory
-        EntityManagerFactory factory = Persistence.
-                createEntityManagerFactory("loja");
         //Para criar um EntityManager precisamos de um EntityManagerFactory uma fábrica de Entitys que cria isto
-        EntityManager entityManager = factory.createEntityManager();
+        EntityManager entityManager = JPAUtil.getEntityManager();
         System.out.println(celular);
         //Se não colocar/iniciar uma transação com a CONF resource_LOCAL ele não vai inserir
         //Transação iniciada
+        ProdutoDAO dao = new ProdutoDAO(entityManager);
+
         entityManager.getTransaction().begin();
         entityManager.flush();
-        entityManager.persist(celular);
+        dao.cadastrar(celular);
         //Transação commitada
         entityManager.getTransaction().commit();
         //Fechar o entytyManager
