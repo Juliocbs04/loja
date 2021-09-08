@@ -19,7 +19,8 @@ public class Produto {
     private String descricao;
     private BigDecimal preco;
     private LocalDate dataCadastro = LocalDate.now();
-    @Enumerated(EnumType.STRING) // para cadastrar o nome da constante
+
+    @ManyToOne
     private Categoria categoria;
 
 }

@@ -1,9 +1,21 @@
 package br.digitalinovationone.loja.model;
 
 
-public enum Categoria {
+import lombok.*;
 
-    CELULARES,
-    INFORMATICA,
-    LIVROS;
+import javax.persistence.*;
+
+@Entity
+@Table(name="categorias")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+
 }
