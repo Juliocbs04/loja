@@ -16,29 +16,32 @@ public class CadastroProduto {
         //Primeiro é necessário persistir a categoria para depois adicionar o Produto...
         Categoria celulares = new Categoria(null,"CELULARES");
         EntityManager entityManager = JPAUtil.getEntityManager();
-        CategoriaDAO daoCategoria = new CategoriaDAO(entityManager);
+        //CategoriaDAO daoCategoria = new CategoriaDAO(entityManager);
         entityManager.getTransaction().begin();
-        daoCategoria.cadastrar(celulares);
+        //daoCategoria.cadastrar(celulares);
         //Transação commitada
+        entityManager.persist(celulares);
+        //após o persis ele fica de olho se tem mudanças no object celulares
+        celulares.setNome("XPTO");
         entityManager.getTransaction().commit();
 
 
-        Produto celular = new Produto();
+        /*Produto celular = new Produto();
         celular.setNome("Xiami Redmi");
         celular.setDescricao("Muito Legal");
         celular.setPreco(new BigDecimal("800"));
-        celular.setCategoria(celulares);
+        celular.setCategoria(celulares);*/
 
         //Não da pra instanciar new EntityManagerFactory
         //Para criar um EntityManager precisamos de um EntityManagerFactory uma fábrica de Entitys que cria isto
         //EntityManager entityManager = JPAUtil.getEntityManager();
-        System.out.println(celular);
+        //System.out.println(celular);
         //Se não colocar/iniciar uma transação com a CONF resource_LOCAL ele não vai inserir
         //Transação iniciada
-        ProdutoDAO dao = new ProdutoDAO(entityManager);
+        //ProdutoDAO dao = new ProdutoDAO(entityManager);
 
         entityManager.getTransaction().begin();
-        dao.cadastrar(celular);
+        //dao.cadastrar(celular);
         //Transação commitada
         entityManager.getTransaction().commit();
         //Fechar o entytyManager

@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Table(name="produtos")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Produto {
     @Id
