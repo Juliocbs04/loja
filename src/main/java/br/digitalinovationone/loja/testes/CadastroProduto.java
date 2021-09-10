@@ -9,10 +9,25 @@ import br.digitalinovationone.loja.util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CadastroProduto {
     public static void main(String[] args) {
+        adicionarProduto();
+        Long id = 1l;
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        ProdutoDAO dao = new ProdutoDAO(entityManager);
+
+        Produto p = dao.buscarPorId(1l);
+        System.out.println("Preço: "+ p.getPreco());
+
+        List<Produto> todos = dao.listarProdutos();
+        todos.forEach(pi-> System.out.println(pi.getNome()));
+    }
+
+    private static void adicionarProduto() {
         //Primeiro é necessário persistir a categoria para depois adicionar o Produto...
         Categoria celulares = new Categoria(null,"CELULARES");
         EntityManager entityManager = JPAUtil.getEntityManager();
@@ -26,11 +41,11 @@ public class CadastroProduto {
         entityManager.getTransaction().commit();
 
 
-        /*Produto celular = new Produto();
+        Produto celular = new Produto();
         celular.setNome("Xiami Redmi");
         celular.setDescricao("Muito Legal");
         celular.setPreco(new BigDecimal("800"));
-        celular.setCategoria(celulares);*/
+        celular.setCategoria(celulares);
 
         //Não da pra instanciar new EntityManagerFactory
         //Para criar um EntityManager precisamos de um EntityManagerFactory uma fábrica de Entitys que cria isto
@@ -38,14 +53,13 @@ public class CadastroProduto {
         //System.out.println(celular);
         //Se não colocar/iniciar uma transação com a CONF resource_LOCAL ele não vai inserir
         //Transação iniciada
-        //ProdutoDAO dao = new ProdutoDAO(entityManager);
+        ProdutoDAO dao = new ProdutoDAO(entityManager);
 
         entityManager.getTransaction().begin();
-        //dao.cadastrar(celular);
+        dao.cadastrar(celular);
         //Transação commitada
         entityManager.getTransaction().commit();
-        //Fechar o entytyManager
+        //Fechar o entityManager
         entityManager.close();
-
     }
 }
