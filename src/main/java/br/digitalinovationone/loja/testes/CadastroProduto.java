@@ -7,9 +7,6 @@ import br.digitalinovationone.loja.model.Produto;
 import br.digitalinovationone.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,8 +20,12 @@ public class CadastroProduto {
         Produto p = dao.buscarPorId(1l);
         System.out.println("Preço: "+ p.getPreco());
 
-        List<Produto> todos = dao.listarProdutos();
+        List<Produto> todos = dao.buscarPorCategoria("CELULARES");
         todos.forEach(pi-> System.out.println(pi.getNome()));
+
+
+
+
     }
 
     private static void adicionarProduto() {
@@ -37,7 +38,7 @@ public class CadastroProduto {
         //Transação commitada
         entityManager.persist(celulares);
         //após o persis ele fica de olho se tem mudanças no object celulares
-        celulares.setNome("XPTO");
+        //celulares.setNome("XPTO");
         entityManager.getTransaction().commit();
 
 
