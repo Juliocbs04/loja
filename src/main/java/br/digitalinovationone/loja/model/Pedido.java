@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,6 +20,9 @@ public class Pedido {
     private Long id;
     private BigDecimal valorTotal;
     private LocalDate data = LocalDate.now();
+
+    @OneToMany
+    private List<ItemPedido> produtos;
 
     @ManyToOne
     private Cliente cliente;
