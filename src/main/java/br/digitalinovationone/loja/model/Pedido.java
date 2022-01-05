@@ -19,10 +19,11 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="valor_total")
     private BigDecimal valorTotal;
     private LocalDate data = LocalDate.now();
 
-    @OneToMany(mappedBy="pedido")
+    @OneToMany(mappedBy="pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
     @ManyToOne

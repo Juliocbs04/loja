@@ -1,5 +1,6 @@
 package br.digitalinovationone.loja.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,12 +13,14 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal preco_unitario;
+    @Column(name="preco_unitario")
+    private BigDecimal precoUnitario;
 
     private Integer quantidade;
     @ManyToOne
@@ -30,6 +33,13 @@ public class ItemPedido {
         this.quantidade = quantidade;
         this.pedido = pedido;
         this.produto = produto;
-        this.preco_unitario = produto.getPreco();
+        this.precoUnitario = produto.getPreco();
+    }
+
+    public ItemPedido(int quantidade, Pedido pedido, Produto produto) {
+        this.quantidade = quantidade;
+        this.pedido=pedido;
+        this.produto=produto;
+        this.precoUnitario = produto.getPreco();
     }
 }
