@@ -30,5 +30,6 @@ public class ItemPedido {
         this.quantidade = quantidade;
         this.pedido = pedido;
         this.produto = produto;
+        this.preco_unitario = produto.getPreco();
     }
 }
