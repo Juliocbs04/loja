@@ -7,7 +7,9 @@ import br.digitalinovationone.loja.model.*;
 import br.digitalinovationone.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
+import javax.xml.bind.SchemaOutputResolver;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CadastroPedido {
     public static void main(String[] args) {
@@ -27,7 +29,18 @@ public class CadastroPedido {
         pedido.adicionarItem(new ItemPedido(10, pedido, produto));
         PedidoDAO pedidoDao=  new PedidoDAO(entityManager);
         pedidoDao.cadastrar(pedido);
+
         entityManager.getTransaction().commit();
+
+        BigDecimal valor = pedidoDao.valorTotalVendido();
+        System.out.println("Valor Total dos pedidos: "+valor);
+
+        List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
+         for(Object[] obj: relatorio){
+            System.out.println(obj[0]);
+            System.out.println(obj[1]);
+            System.out.println(obj[2]);
+         }
 
 
     }

@@ -26,12 +26,22 @@ public class PedidoDAO {
         return this.entityManager.createQuery(jpql, Pedido.class).getResultList();
     }
 
-    public List<Pedido> buscarPorNome(String nome){
-        String jpql= "SELECT p FROM Pedido p WHERE p.nome = :nome";
+    public BigDecimal valorTotalVendido(){
+        String jpql = "SELECT SUM(p.valorTotal) FROM Pedido p";
+        return entityManager.createQuery(jpql, BigDecimal.class).
+                getSingleResult();
+    }
 
-        return this.entityManager.createQuery(jpql, Pedido.class)
-                .setParameter("nome", nome)
-                .getResultList();
+    public List<Object[]> relatorioDeVendas(){
+        String jpql = "SELECT produto.nome, " +
+                "SUM(item.quantidade), MAX(pedido.data) " +
+                "FROM Pedido pedido " +
+                "JOIN pedido.itens item " +
+                "JOIN item.produto produto " +
+                "GROUP BY produto.nome ORDER BY item.quantidade DESC";
+        return entityManager.createQuery(jpql, Object[].class).
+            getResultList();
+
     }
 
 
