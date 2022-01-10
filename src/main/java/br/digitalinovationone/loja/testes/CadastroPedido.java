@@ -5,6 +5,7 @@ import br.digitalinovationone.loja.dao.PedidoDAO;
 import br.digitalinovationone.loja.dao.ProdutoDAO;
 import br.digitalinovationone.loja.model.*;
 import br.digitalinovationone.loja.util.JPAUtil;
+import br.digitalinovationone.loja.vo.RelatorioVendasVo;
 
 import javax.persistence.EntityManager;
 import javax.xml.bind.SchemaOutputResolver;
@@ -35,12 +36,8 @@ public class CadastroPedido {
         BigDecimal valor = pedidoDao.valorTotalVendido();
         System.out.println("Valor Total dos pedidos: "+valor);
 
-        List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
-         for(Object[] obj: relatorio){
-            System.out.println(obj[0]);
-            System.out.println(obj[1]);
-            System.out.println(obj[2]);
-         }
+        List<RelatorioVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+        relatorio.forEach(System.out::println);
 
 
     }

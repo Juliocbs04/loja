@@ -1,6 +1,7 @@
 package br.digitalinovationone.loja.dao;
 
 import br.digitalinovationone.loja.model.Pedido;
+import br.digitalinovationone.loja.vo.RelatorioVendasVo;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -32,14 +33,16 @@ public class PedidoDAO {
                 getSingleResult();
     }
 
-    public List<Object[]> relatorioDeVendas(){
-        String jpql = "SELECT produto.nome, " +
-                "SUM(item.quantidade), MAX(pedido.data) " +
+    public List<RelatorioVendasVo> relatorioDeVendas(){
+        String jpql = "SELECT new br.digitalinovationone.loja.vo.RelatorioVendasVo(" +
+                "produto.nome,"+
+                "SUM(item.quantidade), " +
+                "MAX(pedido.data)) " +
                 "FROM Pedido pedido " +
                 "JOIN pedido.itens item " +
                 "JOIN item.produto produto " +
                 "GROUP BY produto.nome ORDER BY item.quantidade DESC";
-        return entityManager.createQuery(jpql, Object[].class).
+        return entityManager.createQuery(jpql, RelatorioVendasVo.class).
             getResultList();
 
     }
