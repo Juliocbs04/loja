@@ -26,7 +26,7 @@ public class Pedido {
     @OneToMany(mappedBy="pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
     public Pedido(Cliente cliente) {
