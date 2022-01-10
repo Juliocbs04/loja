@@ -47,5 +47,12 @@ public class PedidoDAO {
 
     }
 
+    public Pedido buscarPedidoComCliente(Long id){
+        return this.entityManager.createQuery("SELECT p from Pedido p JOIN FETCH p.cliente WHERE p.id=::id", Pedido.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+
 
 }
