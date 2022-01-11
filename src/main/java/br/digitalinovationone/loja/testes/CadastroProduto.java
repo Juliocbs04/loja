@@ -17,11 +17,13 @@ public class CadastroProduto {
         EntityManager entityManager = JPAUtil.getEntityManager();
         ProdutoDAO dao = new ProdutoDAO(entityManager);
 
-        Produto p = dao.buscarPorId(1l);
+        /*Produto p = dao.buscarPorId(1l);
         System.out.println("Preço: "+ p.getPreco());
 
         List<Produto> todos = dao.buscarPorCategoria("CELULARES");
-        todos.forEach(pi-> System.out.println(pi.getNome()));
+        todos.forEach(pi-> System.out.println(pi.getNome()));*/
+
+        dao.buscarPorParametrosCriteria("Xiami Redmi",null,null);
 
 
 
