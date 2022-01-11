@@ -3,7 +3,9 @@ package br.digitalinovationone.loja.dao;
 import br.digitalinovationone.loja.model.Produto;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProdutoDAO {
@@ -47,6 +49,27 @@ public class ProdutoDAO {
         return entityManager.createQuery(jpql, BigDecimal.class)
                 .setParameter("nome", nome)
                 .getSingleResult();
+    }
+
+    public List<Produto> buscarPorParametros(String nome, BigDecimal preco, LocalDate dataCadastro){
+        String jpql = "SELECT p from Produto p WHERE 1=1";
+        if(nome!=null&&nome.trim().isEmpty()){
+            jpql = "AND p.nome = :nome";
+        }if(preco!=null){
+            jpql = "AND p.preco = :preco";
+        }if(dataCadastro!=null){
+            jpql = "AND p.dataCadastro = :dataCadastro";
+        }
+        TypedQuery<Produto> query= entityManager.createQuery(jpql, Produto.class);
+        if(nome!=null&&nome.trim().isEmpty()){
+            query.setParameter("nome", nome);
+        }if(preco!=null){
+            query.setParameter("preco", preco);
+        }if(dataCadastro!=null){
+            query.setParameter("dataCadastro", dataCadastro);
+        }
+
+        return query.getResultList();
     }
 
 
