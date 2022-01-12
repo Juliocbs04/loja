@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
