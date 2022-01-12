@@ -8,6 +8,7 @@ import br.digitalinovationone.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CadastroProduto {
@@ -23,7 +24,7 @@ public class CadastroProduto {
         List<Produto> todos = dao.buscarPorCategoria("CELULARES");
         todos.forEach(pi-> System.out.println(pi.getNome()));*/
 
-        dao.buscarPorParametrosCriteria("Xiami Redmi",null,null);
+        dao.buscarPorParametrosCriteria("Xiami Redmi", null, LocalDate.now());
 
 
 
