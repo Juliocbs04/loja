@@ -44,7 +44,7 @@ public class CadastroPedido {
 
     private static void adicionarProduto() {
         //Primeiro é necessário persistir a categoria para depois adicionar o Produto...
-        Categoria celulares = new Categoria(null,"CELULARES");
+        Categoria celulares = new Categoria("CELULARES");
         EntityManager entityManager = JPAUtil.getEntityManager();
         //CategoriaDAO daoCategoria = new CategoriaDAO(entityManager);
 

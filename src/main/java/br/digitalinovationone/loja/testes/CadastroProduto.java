@@ -9,7 +9,6 @@ import br.digitalinovationone.loja.util.JPAUtil;
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 public class CadastroProduto {
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class CadastroProduto {
 
     private static void adicionarProduto() {
         //Primeiro é necessário persistir a categoria para depois adicionar o Produto...
-        Categoria celulares = new Categoria(null,"CELULARES");
+        Categoria celulares = new Categoria("CELULARES");
         EntityManager entityManager = JPAUtil.getEntityManager();
         //CategoriaDAO daoCategoria = new CategoriaDAO(entityManager);
         entityManager.getTransaction().begin();
